@@ -1,0 +1,205 @@
+@startuml
+
+/' diagram meta data start
+config=StructureConfiguration;
+{
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": ""
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": true,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": false,
+    "cutInterfaceStructures": false,
+    "cutDataStructures": false,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 6,
+    "backwardDepth": 6,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": true,
+    "hideInterfaceCalls": true, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false // root node is included
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showClassGenericTypes": true,
+    "showMethods": true,
+    "showMethodParameterNames": true,
+    "showMethodParameterTypes": true,
+    "showMethodReturnType": true,
+    "showPackageLevels": 2,
+    "showDetailedClassStructure": true
+  },
+  "rootClass": "model.impl.JavaGachi"
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="TB"
+    splines=polyline
+    
+
+'nodes 
+subgraph cluster_2069097 { 
+   	label=handlers
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   GameHandlerImpl1271695589[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)GameHandlerImpl</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   controller: JavaGachiMainScreenController [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   gameTime: long [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ increaseGameTime(p_amount: long)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ loadSavedGameFromFile(p_bAntiCheatEnabled: boolean)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ newGame()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ pauseGame()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ playGame()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ progressTime()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ resumeGame()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ saveGameToFile()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_3236384 { 
+   	label=impl
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   JavaGachi2059481541[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)JavaGachi</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   birthdayDate: Date [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   emotion: JavaGachiEmotionEnum [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   happinessLevel: double [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   hungerLevel: double [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   javaGachiAge: IJavaGachiAge [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   javaGachiSpriteColor: Color [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   name: String [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ decreaseHappinessLevel(p_amount: double)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ decreaseHungerLevel(p_amount: double)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ increaseHappinessLevel(p_amount: double)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ increaseHungerLevel(p_amount: double)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+JavaGachiAgeImpl2059481541[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)JavaGachiAgeImpl</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   daysOld: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   secondsOld: long [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ incrementSecondsOld()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+JavaGachiMainScreenController445310670[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)JavaGachiMainScreenController</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   model: IJavaGachi [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   screenFrame: JFrame [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   view: IJavaGachiMainScreenView [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ bind(p_view: IJavaGachiMainScreenView, p_model: IJavaGachi)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ changeColor(img: BufferedImage, oldColor: Color, newColor: Color)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ checkJavaGachiStatus()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ decreaseJavaGachiHappiness(p_amount: double)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ decreaseJavaGachiHunger(p_amount: double)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ gameStateUpdate(p_currentGameTime: long)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ increaseJavaGachiHappiness(p_amount: double)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ increaseJavaGachiHunger(p_amount: double)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ initialize()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ observe(o: Observable)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ progressTime()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ progressTime(p_amount: double)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ repaintUI()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ update(o: Observable, arg: Object)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+PlayerJavaGachiImpl2059481541[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)PlayerJavaGachiImpl</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+'edges    
+GameHandlerImpl1271695589 -> JavaGachiMainScreenController445310670[label="controller
+[0..1]"];
+JavaGachi2059481541 -> JavaGachiAgeImpl2059481541[arrowhead=none, arrowtail=empty, dir=both];
+JavaGachi2059481541 -> PlayerJavaGachiImpl2059481541[arrowhead=none, arrowtail=empty, dir=both];
+JavaGachiMainScreenController445310670 -> JavaGachi2059481541[label="model
+[0..1]"];
+    
+}
+@enduml
