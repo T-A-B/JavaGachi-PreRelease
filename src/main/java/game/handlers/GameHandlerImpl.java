@@ -65,9 +65,7 @@ public class GameHandlerImpl implements IGameHandler, Serializable {
 
             }
             progressTime();
-            if(mainGameController.getModel().getEmotion().getInternalDescription().equals(JavaGachiEmotionEnum.DEAD.getInternalDescription())){
-                System.exit(0);
-            }
+
             System.out.println(gameTime);
             System.out.println(mainGameController.getModel().getJavaGachiAge().getSecondsOld() + " SECONDS OLD");
         }
