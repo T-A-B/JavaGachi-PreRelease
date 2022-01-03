@@ -3,6 +3,7 @@ package game.handlers;
 import controller.impl.CharacterCreationScreenController;
 import controller.impl.FriendListController;
 import controller.impl.JavaGachiMainScreenController;
+import driver.Driver;
 import game.interfaces.IGameHandler;
 import model.impl.JavaGachi;
 import model.impl.JavaGachiAgeImpl;
@@ -82,7 +83,9 @@ public class GameHandlerImpl implements IGameHandler, Serializable {
     @Override
     public void loadSavedGameFromFile(boolean p_bAntiCheatEnabled) {
        try{
-        FileInputStream fi = new FileInputStream(new File("savedGame.dat"));
+           File jarFile = new File(Driver.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+           File fileTs = new File(jarFile.getParentFile().getParent(), "savedGame.dat");
+        FileInputStream fi = new FileInputStream(fileTs);
         ObjectInputStream oi = new ObjectInputStream(fi);
 
         // Read objects
@@ -122,7 +125,10 @@ public class GameHandlerImpl implements IGameHandler, Serializable {
 
 
         try {
-            FileOutputStream f = new FileOutputStream(new File("savedGame.dat"));
+            File jarFile = new File(Driver.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+            File fileTs = new File(jarFile.getParentFile().getParent(), "savedGame.dat");
+
+            FileOutputStream f = new FileOutputStream(fileTs);
             ObjectOutputStream o = new ObjectOutputStream(f);
 
             // Write objects to file

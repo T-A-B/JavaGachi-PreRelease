@@ -84,16 +84,10 @@ public class FriendListController implements IFriendListController {
                 p_view.getJavaGachiAgeDisplayLabel().setText( Long.toString( p_view.getJavaGachiJList().getSelectedValue().getJavaGachiAge().getSecondsOld()));
                 p_view.getJavaGachiNameDipslayLabel().setText(p_view.getJavaGachiJList().getSelectedValue().getJavaGachiName());
                 BufferedImage characterSprite = null;
-                System.out.println(JavaGachiSpriteEnum.BASE.getImageFile().getAbsolutePath());
-                try {
-                    characterSprite = ImageIO.read(JavaGachiSpriteEnum.BASE.getImageFile());
-                    changeColor(characterSprite, Color.BLACK, p_view.getJavaGachiJList().getSelectedValue().getSpriteColor());
-                    changeColor(characterSprite, new Color(127,127,127),  p_view.getJavaGachiJList().getSelectedValue().getEyeColor());
-
-                } catch (IOException ex) {
-                    System.out.println("IMAGE LOADING DISASTER HAS OCCURRED");
-                    ex.printStackTrace();
-                }
+           //     System.out.println(JavaGachiSpriteEnum.BASE.getImageFile().getAbsolutePath());
+                characterSprite = JavaGachiSpriteEnum.BASE.getBufferedImage();
+                changeColor(characterSprite, Color.BLACK, p_view.getJavaGachiJList().getSelectedValue().getSpriteColor());
+                changeColor(characterSprite, new Color(127,127,127),  p_view.getJavaGachiJList().getSelectedValue().getEyeColor());
 
                 ImageIcon iconIcon = new ImageIcon(characterSprite);
 

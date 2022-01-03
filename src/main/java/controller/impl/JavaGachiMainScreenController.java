@@ -64,7 +64,8 @@ public class JavaGachiMainScreenController implements IJavaGachiMainScreenContro
     public void setJavaGachiEmotion(){
 
 
-            ImageIcon iconIcon = new ImageIcon(model.getEmotion().getImageFile().getPath());
+            ImageIcon iconIcon = model.getEmotion().getImageIcon();
+
             view.getEmotionImageContainer().setIcon(iconIcon);
 
 
@@ -91,13 +92,13 @@ public class JavaGachiMainScreenController implements IJavaGachiMainScreenContro
             initializeFriendListController();
         }
         BufferedImage characterSprite = null;
-            System.out.println(JavaGachiSpriteEnum.BASE.getImageFile().getAbsolutePath());
+        //    System.out.println(JavaGachiSpriteEnum.BASE.getImageFile().getAbsolutePath());
         try {
-             characterSprite = ImageIO.read(JavaGachiSpriteEnum.BASE.getImageFile());
+             characterSprite = JavaGachiSpriteEnum.BASE.getBufferedImage();
              changeColor(characterSprite, Color.BLACK, model.getSpriteColor());
              changeColor(characterSprite, new Color(127,127,127), model.getEyeColor());
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.out.println("IMAGE LOADING DISASTER HAS OCCURRED");
             e.printStackTrace();
         }
@@ -332,6 +333,10 @@ public class JavaGachiMainScreenController implements IJavaGachiMainScreenContro
 
         }
         model.getJavaGachiAge().incrementSecondsOld();
+
+        if(!view.getViewPanel().isVisible()){
+            System.exit(0);
+        }
     }
 
 
