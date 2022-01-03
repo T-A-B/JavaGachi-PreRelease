@@ -29,6 +29,11 @@ public class JavaGachiMainScreenController implements IJavaGachiMainScreenContro
 
     IJavaGachi model;
     IJavaGachiMainScreenView view;
+
+    public JFrame getScreenFrame() {
+        return screenFrame;
+    }
+
     JFrame screenFrame = new JFrame();
     JavaGachiImportHandler importHandler = new JavaGachiImportHandler();
     boolean friendListControllerInitialized;
@@ -123,27 +128,22 @@ public class JavaGachiMainScreenController implements IJavaGachiMainScreenContro
     @Override
     public void bind(IJavaGachiMainScreenView p_view, IJavaGachi p_model) {
 
+        addListeners(p_view);
+
+    }
+
+    private void addListeners(IJavaGachiMainScreenView p_view) {
         p_view.getButtonOne().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                incrementStatsForTimesFed();
-                System.out.println("Button One Action happened");
-                decreaseJavaGachiHunger(1.1);
-                checkJavaGachiStatus();
-                setJavaGachiEmotion();
-                repaintUI();
+                doFeedButtonAction();
             }
         });
         p_view.getButtonTwo().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                incrementStatsForTimesPet();
-
-                System.out.println("Button Two Action happened");
-                increaseJavaGachiHappiness(1.1);
-                checkJavaGachiStatus();
-                setJavaGachiEmotion();
-                repaintUI();            }
+                doPetButtonAction();
+            }
         });
         p_view.getButtonThree().addActionListener(new ActionListener() {
             @Override
@@ -154,37 +154,68 @@ public class JavaGachiMainScreenController implements IJavaGachiMainScreenContro
         p_view.getExportButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ExportJavaGachiDialog d = new ExportJavaGachiDialog((PlayerJavaGachiImpl) model);
-                d.showDialog();
+                doExportButtonAction();
             }
         });
         p_view.getImportButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String test = "";
-
-                magicContainer magicC = new magicContainer();
-
-                ImportJavaGachiDialog d = new ImportJavaGachiDialog(magicC);
-                d.showDialog();
-
-                test = magicC.getString();
-                System.out.println(test);
-                friendListController.getModel().getJavaGachiList().add(importHandler.loadJavaGachiFromEncryptedCode(test));
+                doImportButtonAction();
 
             }
         });
         p_view.getFriendsButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                friendListController.showFrame();
-                System.out.println("ding");
+                doFriendsButtonAction();
 
 
             }
         });
-
     }
+
+    private void doPetButtonAction() {
+        incrementStatsForTimesPet();
+
+        System.out.println("Button Two Action happened");
+        increaseJavaGachiHappiness(1.1);
+        checkJavaGachiStatus();
+        setJavaGachiEmotion();
+        repaintUI();
+    }
+
+    private void doFeedButtonAction() {
+        incrementStatsForTimesFed();
+        System.out.println("Button One Action happened");
+        decreaseJavaGachiHunger(1.1);
+        checkJavaGachiStatus();
+        setJavaGachiEmotion();
+        repaintUI();
+    }
+
+    private void doExportButtonAction() {
+        ExportJavaGachiDialog d = new ExportJavaGachiDialog((PlayerJavaGachiImpl) model);
+        d.showDialog();
+    }
+
+    private void doImportButtonAction() {
+        String test = "";
+
+        magicContainer magicC = new magicContainer();
+
+        ImportJavaGachiDialog d = new ImportJavaGachiDialog(magicC);
+        d.showDialog();
+
+        test = magicC.getString();
+        System.out.println(test);
+        friendListController.getModel().getJavaGachiList().add(importHandler.loadJavaGachiFromEncryptedCode(test));
+    }
+
+    private void doFriendsButtonAction() {
+        friendListController.showFrame();
+        System.out.println("ding");
+    }
+
     public void repaintUI(){
         view.getViewPanel().repaint();
 
@@ -334,7 +365,7 @@ public class JavaGachiMainScreenController implements IJavaGachiMainScreenContro
         }
         model.getJavaGachiAge().incrementSecondsOld();
 
-        if(!view.getViewPanel().isVisible()){
+        if(!view.getViewPanel().isVisible() && model.getJavaGachiAge().getSecondsOld() > 1){
             System.exit(0);
         }
     }

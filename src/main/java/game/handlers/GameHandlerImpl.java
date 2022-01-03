@@ -4,6 +4,7 @@ import controller.impl.CharacterCreationScreenController;
 import controller.impl.FriendListController;
 import controller.impl.JavaGachiMainScreenController;
 import driver.Driver;
+import enums.JavaGachiEmotionEnum;
 import game.interfaces.IGameHandler;
 import model.impl.JavaGachi;
 import model.impl.JavaGachiAgeImpl;
@@ -14,11 +15,22 @@ import view.impl.CharacterCreationScreenViewImpl;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.*;
 import java.util.Date;
 
 public class GameHandlerImpl implements IGameHandler, Serializable {
+
     JavaGachiMainScreenController mainGameController;
+
+    WindowListener listener = new WindowAdapter() {
+        public void windowClosing(WindowEvent evt) {
+            Frame frame = (Frame) evt.getSource();
+            System.exit(0);
+        }
+    };
 
     long gameTime = 0;
     public GameHandlerImpl(JavaGachiMainScreenController controller) {
@@ -27,6 +39,10 @@ public class GameHandlerImpl implements IGameHandler, Serializable {
 
     @Override
     public void playGame() {
+
+        mainGameController.getScreenFrame().addWindowListener(listener);
+
+
         String inputForNewGame = JOptionPane.showInputDialog("New Game (Y/N)");
         boolean bNewGame = inputForNewGame.equalsIgnoreCase("Y") ? true : false;
         long gameTimer = 0;
@@ -49,6 +65,9 @@ public class GameHandlerImpl implements IGameHandler, Serializable {
 
             }
             progressTime();
+            if(mainGameController.getModel().getEmotion().getInternalDescription().equals(JavaGachiEmotionEnum.DEAD.getInternalDescription())){
+                System.exit(0);
+            }
             System.out.println(gameTime);
             System.out.println(mainGameController.getModel().getJavaGachiAge().getSecondsOld() + " SECONDS OLD");
         }
