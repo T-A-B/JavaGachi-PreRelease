@@ -17,6 +17,8 @@ import view.interfaces.IJavaGachiMainScreenView;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -91,6 +93,27 @@ public class JavaGachiMainScreenController implements IJavaGachiMainScreenContro
         }
     }
 
+    public void shiftSpriteV(BufferedImage img, Color spriteColor, Color eyeColor, int amount) {
+        if(spriteColor == null || eyeColor == null) {
+            return;
+        }
+        final int oldRGB = spriteColor.getRGB();
+        final int newRGB = eyeColor.getRGB();
+
+        for (int x = 0; x < img.getWidth(); x++) {
+            for (int y = 0; y < img.getHeight(); y++) {
+                int rgbVal = img.getRGB(x, y);
+                if (rgbVal == oldRGB || rgbVal == newRGB) {
+                    img.setRGB(x,y, 255255255);
+                    img.setRGB(x, y+amount, rgbVal);
+                }
+
+            }
+        }
+    }
+
+
+
     @Override
     public void initialize() {
         if(!friendListControllerInitialized) {
@@ -102,7 +125,6 @@ public class JavaGachiMainScreenController implements IJavaGachiMainScreenContro
              characterSprite = JavaGachiSpriteEnum.BASE.getBufferedImage();
              changeColor(characterSprite, Color.BLACK, model.getSpriteColor());
              changeColor(characterSprite, new Color(127,127,127), model.getEyeColor());
-
         } catch (Exception e) {
             System.out.println("IMAGE LOADING DISASTER HAS OCCURRED");
             e.printStackTrace();
@@ -179,6 +201,10 @@ public class JavaGachiMainScreenController implements IJavaGachiMainScreenContro
 
         System.out.println("Button Two Action happened");
         increaseJavaGachiHappiness(1.1);
+        performStatusUpdateAndEmotionUpdate();
+    }
+
+    private void performStatusUpdateAndEmotionUpdate() {
         checkJavaGachiStatus();
         setJavaGachiEmotion();
         repaintUI();
@@ -188,9 +214,7 @@ public class JavaGachiMainScreenController implements IJavaGachiMainScreenContro
         incrementStatsForTimesFed();
         System.out.println("Button One Action happened");
         decreaseJavaGachiHunger(1.1);
-        checkJavaGachiStatus();
-        setJavaGachiEmotion();
-        repaintUI();
+        performStatusUpdateAndEmotionUpdate();
     }
 
     private void doExportButtonAction() {
@@ -358,9 +382,7 @@ public class JavaGachiMainScreenController implements IJavaGachiMainScreenContro
         if(p_currentGameTime % 60L == 0){
             decreaseJavaGachiHappiness(0.8);
             increaseJavaGachiHunger(1);
-            checkJavaGachiStatus();
-            setJavaGachiEmotion();
-            repaintUI();
+            performStatusUpdateAndEmotionUpdate();
 
         }
         model.getJavaGachiAge().incrementSecondsOld();
@@ -380,6 +402,7 @@ public class JavaGachiMainScreenController implements IJavaGachiMainScreenContro
         friendListController.setView(view);
         friendListController.bind(friendListController.getView(), friendListController.getModel());
         friendListController.initialize();
+        applyMagicLister();
 
     }
    public void initializeFriendListControllerFromSave(JavaGachiFriendListModel flm){
@@ -391,9 +414,37 @@ public class JavaGachiMainScreenController implements IJavaGachiMainScreenContro
         friendListController.bind(friendListController.getView(), friendListController.getModel());
         friendListController.initialize();
         friendListControllerInitialized = true;
+        applyMagicLister();
 
     }
     public FriendListController getFriendListController(){
         return friendListController;
+    }
+
+    public void applyMagicLister(){
+        friendListController.getView().getJavaGachiJList().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if(friendListController.getView().getJavaGachiJList().getSelectedValue() != null){
+                    BufferedImage characterSprite = null;
+                    //    System.out.println(JavaGachiSpriteEnum.BASE.getImageFile().getAbsolutePath());
+                    try {
+                        characterSprite = JavaGachiSpriteEnum.BASE.getBufferedImage();
+                        changeColor(characterSprite, Color.BLACK, friendListController.getView().getJavaGachiJList().getSelectedValue().getSpriteColor());
+                        changeColor(characterSprite, new Color(127,127,127), friendListController.getView().getJavaGachiJList().getSelectedValue().getEyeColor());
+                    } catch (Exception ex) {
+                        System.out.println("IMAGE LOADING DISASTER HAS OCCURRED");
+                        ex.printStackTrace();
+                    }
+
+                    ImageIcon iconIcon = new ImageIcon(characterSprite);
+
+                    view.getFriendSpriteContainer().setIcon(iconIcon);
+                    view.getFriendNameLabel().setText(friendListController.getView().getJavaGachiJList().getSelectedValue().getJavaGachiName());
+                }
+
+                repaintUI();
+            }
+        });
     }
 }

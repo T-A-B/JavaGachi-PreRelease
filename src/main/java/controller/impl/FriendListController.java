@@ -81,7 +81,7 @@ public class FriendListController implements IFriendListController {
         p_view.getShowButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                p_view.getJavaGachiAgeDisplayLabel().setText( Long.toString( p_view.getJavaGachiJList().getSelectedValue().getJavaGachiAge().getSecondsOld()));
+                p_view.getJavaGachiAgeDisplayLabel().setText( Long.toString( p_view.getJavaGachiJList().getSelectedValue().getJavaGachiAge().getSecondsOld() / 60));
                 p_view.getJavaGachiNameDipslayLabel().setText(p_view.getJavaGachiJList().getSelectedValue().getJavaGachiName());
                 BufferedImage characterSprite = null;
            //     System.out.println(JavaGachiSpriteEnum.BASE.getImageFile().getAbsolutePath());
