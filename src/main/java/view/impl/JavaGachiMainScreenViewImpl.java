@@ -24,6 +24,7 @@ public class JavaGachiMainScreenViewImpl extends JPanel implements IJavaGachiMai
     private JPanel friendJavaGachiPicturePanel;
     private JLabel friendNameLabel;
     private JLabel friendSpriteContainer;
+    private JLabel relationshipSpriteContainer;
 
     public JavaGachiMainScreenViewImpl(){
         super();
@@ -93,6 +94,12 @@ public class JavaGachiMainScreenViewImpl extends JPanel implements IJavaGachiMai
     @Override
     public JLabel getFriendNameLabel() {
         return friendNameLabel;
+    }
+
+
+    @Override
+    public JLabel getRelationshipSpriteContainer() {
+        return relationshipSpriteContainer;
     }
 }
 

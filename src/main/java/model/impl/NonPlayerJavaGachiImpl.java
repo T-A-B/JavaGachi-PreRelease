@@ -5,7 +5,9 @@ import enums.JavaGachiEmotionEnum;
 import java.awt.*;
 import java.io.Serializable;
 
-public class NonPlayerJavaGachiImpl extends JavaGachi  {
+public class NonPlayerJavaGachiImpl extends JavaGachi {
+
+
 
 
 

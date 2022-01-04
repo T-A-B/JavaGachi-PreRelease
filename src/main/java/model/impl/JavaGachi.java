@@ -10,7 +10,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Observable;
 
-public abstract class JavaGachi extends Observable implements IJavaGachi, Serializable {
+public abstract class JavaGachi  implements IJavaGachi, Serializable {
+
 
     private static final long serialVersionUID = -3722117614161150575L;
     String name;
@@ -22,6 +23,9 @@ public abstract class JavaGachi extends Observable implements IJavaGachi, Serial
     Color javaGachiSpriteColor;
     Color javaGachiEyeColor;
     IJavaGachiStatistics javaGachiStatistics;
+    int javaGachiRelationshipValue = 0;
+
+
 
     @Override
     public String getJavaGachiName() {
@@ -65,10 +69,6 @@ public abstract class JavaGachi extends Observable implements IJavaGachi, Serial
 
     public void setName(String name) {
         this.name = name;
-        if (name != this.name){
-            notifyObservers();
-        }
-
     }
 
     public void setBirthdayDate(Date birthdayDate) {
@@ -131,9 +131,6 @@ public abstract class JavaGachi extends Observable implements IJavaGachi, Serial
     }
 
     public void setEmotion(JavaGachiEmotionEnum emotion) {
-        if (emotion != this.emotion){
-            notifyObservers();
-        }
         this.emotion = emotion;
     }
 
@@ -159,6 +156,31 @@ public abstract class JavaGachi extends Observable implements IJavaGachi, Serial
         return javaGachiStatistics;
     }
 
+    @Override
+    public int getRelationshipLevel() {
+        return this.javaGachiRelationshipValue;
+    }
+
+    @Override
+    public void increaseRelationshipLevel() {
+        this.javaGachiRelationshipValue++;
+    }
+
+    @Override
+    public void decreaseRelationshipLevel() {
+        this.javaGachiRelationshipValue--;
+    }
+
+    @Override
+    public void increaseRelationshipLevel(int amount) {
+        this.javaGachiRelationshipValue += amount;
+
+    }
+
+    @Override
+    public void decreaseRelationshipLevel(int amount) {
+        this.javaGachiRelationshipValue -= amount;
+    }
 
     @Override
     public String toString() {

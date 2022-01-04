@@ -9,13 +9,13 @@ import dlg.magicContainer;
 import enums.JavaGachiEmotionEnum;
 import enums.JavaGachiSpriteEnum;
 import game.handlers.JavaGachiImportHandler;
+import model.impl.JavaGachiAgeImpl;
 import model.impl.JavaGachiFriendListModel;
 import model.impl.PlayerJavaGachiImpl;
 import model.interfaces.IJavaGachi;
 import view.impl.FriendListScreenViewImpl;
 import view.interfaces.IJavaGachiMainScreenView;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -23,7 +23,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 
 
 public class JavaGachiMainScreenController implements IJavaGachiMainScreenController {
@@ -31,6 +30,8 @@ public class JavaGachiMainScreenController implements IJavaGachiMainScreenContro
 
     IJavaGachi model;
     IJavaGachiMainScreenView view;
+
+    IJavaGachi activeFriendModel;
 
     public JFrame getScreenFrame() {
         return screenFrame;
@@ -379,17 +380,60 @@ public class JavaGachiMainScreenController implements IJavaGachiMainScreenContro
 
     @Override
     public void gameStateUpdate(long p_currentGameTime) {
-        if(p_currentGameTime % 60L == 0){
+        if (p_currentGameTime % 60L == 0) {
             decreaseJavaGachiHappiness(0.8);
             increaseJavaGachiHunger(1);
             performStatusUpdateAndEmotionUpdate();
 
         }
-        model.getJavaGachiAge().incrementSecondsOld();
 
-        if(!view.getViewPanel().isVisible() && model.getJavaGachiAge().getSecondsOld() > 1){
-            System.exit(0);
+
+
+        model.getJavaGachiAge().incrementSecondsOld();
+        if (activeFriendModel != null) {
+            updateFriendModelAndGUI();
+
+
         }
+    }
+
+    private void updateFriendModelAndGUI() {
+
+        if (activeFriendModel.getJavaGachiAge() == null) {
+            activeFriendModel.setJavaGachiAge(new JavaGachiAgeImpl());
+        }
+
+        if (activeFriendModel.getJavaGachiAge().getSecondsOld() % 300 == 0){
+            activeFriendModel.increaseRelationshipLevel();
+        }
+        activeFriendModel.getJavaGachiAge().incrementSecondsOld();
+
+        switch(activeFriendModel.getRelationshipLevel()) {
+            case 0:
+            case 1:
+            case 2:
+
+                view.getRelationshipSpriteContainer().setIcon(new ImageIcon(JavaGachiEmotionEnum.CONTENT.getBufferedImage()));
+                break;
+            case 3:
+            case 4:
+            case 5:
+
+                view.getRelationshipSpriteContainer().setIcon(new ImageIcon(JavaGachiEmotionEnum.ONE_HEART.getBufferedImage()));
+                break;
+            case 6:
+            case 7:
+            case 8:
+            case 9:
+
+                view.getRelationshipSpriteContainer().setIcon(new ImageIcon(JavaGachiEmotionEnum.TWO_HEART.getBufferedImage()));
+                break;
+            case 10:
+                view.getRelationshipSpriteContainer().setIcon(new ImageIcon(JavaGachiEmotionEnum.THREE_HEART.getBufferedImage()));
+                break;
+
+        }
+
     }
 
 
@@ -402,7 +446,7 @@ public class JavaGachiMainScreenController implements IJavaGachiMainScreenContro
         friendListController.setView(view);
         friendListController.bind(friendListController.getView(), friendListController.getModel());
         friendListController.initialize();
-        applyMagicLister();
+        applyMagicListener();
 
     }
    public void initializeFriendListControllerFromSave(JavaGachiFriendListModel flm){
@@ -414,37 +458,54 @@ public class JavaGachiMainScreenController implements IJavaGachiMainScreenContro
         friendListController.bind(friendListController.getView(), friendListController.getModel());
         friendListController.initialize();
         friendListControllerInitialized = true;
-        applyMagicLister();
+        applyMagicListener();
 
     }
     public FriendListController getFriendListController(){
         return friendListController;
     }
 
-    public void applyMagicLister(){
+    public void applyMagicListener(){
         friendListController.getView().getJavaGachiJList().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                if(friendListController.getView().getJavaGachiJList().getSelectedValue() != null){
-                    BufferedImage characterSprite = null;
-                    //    System.out.println(JavaGachiSpriteEnum.BASE.getImageFile().getAbsolutePath());
-                    try {
-                        characterSprite = JavaGachiSpriteEnum.BASE.getBufferedImage();
-                        changeColor(characterSprite, Color.BLACK, friendListController.getView().getJavaGachiJList().getSelectedValue().getSpriteColor());
-                        changeColor(characterSprite, new Color(127,127,127), friendListController.getView().getJavaGachiJList().getSelectedValue().getEyeColor());
-                    } catch (Exception ex) {
-                        System.out.println("IMAGE LOADING DISASTER HAS OCCURRED");
-                        ex.printStackTrace();
-                    }
-
-                    ImageIcon iconIcon = new ImageIcon(characterSprite);
-
-                    view.getFriendSpriteContainer().setIcon(iconIcon);
-                    view.getFriendNameLabel().setText(friendListController.getView().getJavaGachiJList().getSelectedValue().getJavaGachiName());
-                }
-
-                repaintUI();
+                loadFriendSpriteIntoMainPanel();
             }
         });
+    }
+
+    private void loadFriendSpriteIntoMainPanel() {
+        if(friendListController.getView().getJavaGachiJList().getSelectedValue() != null){
+            BufferedImage characterSprite = null;
+            activeFriendModel = friendListController.getView().getJavaGachiJList().getSelectedValue();
+            //    System.out.println(JavaGachiSpriteEnum.BASE.getImageFile().getAbsolutePath());
+            try {
+                characterSprite = JavaGachiSpriteEnum.BASE.getBufferedImage();
+                changeColor(characterSprite, Color.BLACK, activeFriendModel.getSpriteColor());
+                changeColor(characterSprite, new Color(127,127,127), activeFriendModel.getEyeColor());
+            } catch (Exception ex) {
+                System.out.println("IMAGE LOADING DISASTER HAS OCCURRED");
+                ex.printStackTrace();
+            }
+
+            ImageIcon iconIcon = new ImageIcon(characterSprite);
+
+            view.getFriendSpriteContainer().setIcon(iconIcon);
+            view.getFriendNameLabel().setText(activeFriendModel.getJavaGachiName());
+        }
+
+        repaintUI();
+    }
+
+    public IJavaGachi getActiveFriendModel() {
+        return activeFriendModel;
+    }
+
+    public JavaGachiImportHandler getImportHandler() {
+        return importHandler;
+    }
+
+    public boolean isFriendListControllerInitialized() {
+        return friendListControllerInitialized;
     }
 }

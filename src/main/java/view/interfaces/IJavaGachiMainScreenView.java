@@ -16,5 +16,6 @@ public interface IJavaGachiMainScreenView {
     JButton getFriendsButton();
     JLabel getFriendSpriteContainer();
     JLabel getFriendNameLabel();
+    JLabel getRelationshipSpriteContainer();
 
 }

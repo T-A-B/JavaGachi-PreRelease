@@ -27,7 +27,7 @@ public interface IJavaGachi  {
     void setSpriteColor(Color p_spriteColor);
     void setSpriteEyeColor(Color p_spriteEyeColor);
     void setJavaGachiName(String p_name);
-
+    void setJavaGachiAge(IJavaGachiAge p_javaGachiAge);
     IJavaGachiStatistics getStatistics();
 
 
@@ -35,4 +35,11 @@ public interface IJavaGachi  {
 
 
     void setBirthdayDate(Date date);
+
+    int getRelationshipLevel();
+
+    void increaseRelationshipLevel();
+    void decreaseRelationshipLevel();
+    void increaseRelationshipLevel(int amount);
+    void decreaseRelationshipLevel(int amount);
 }
