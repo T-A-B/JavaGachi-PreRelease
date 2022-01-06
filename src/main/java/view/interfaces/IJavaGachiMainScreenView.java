@@ -14,6 +14,7 @@ public interface IJavaGachiMainScreenView {
     JButton getImportButton();
     JButton getExportButton();
     JButton getFriendsButton();
+    JButton getWebViewButton();
     JLabel getFriendSpriteContainer();
     JLabel getFriendNameLabel();
     JLabel getRelationshipSpriteContainer();

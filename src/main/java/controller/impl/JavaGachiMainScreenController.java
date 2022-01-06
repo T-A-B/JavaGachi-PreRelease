@@ -1,5 +1,6 @@
 package controller.impl;
 
+import com.sun.jndi.toolkit.url.Uri;
 import configuration.GlobalConfiguration;
 import controller.interfaces.IJavaGachiMainScreenController;
 import dlg.EndOfGameDialog;
@@ -23,6 +24,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 
 public class JavaGachiMainScreenController implements IJavaGachiMainScreenController {
@@ -192,6 +197,19 @@ public class JavaGachiMainScreenController implements IJavaGachiMainScreenContro
             public void actionPerformed(ActionEvent e) {
                 doFriendsButtonAction();
 
+
+            }
+        });
+        p_view.getWebViewButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    URI uri = new URI("http://localhost:8080/greeting?name=" + model.getJavaGachiName() + "&age=" + model.getJavaGachiAge().getSecondsOld());
+
+                    Desktop.getDesktop().browse(uri);
+                } catch (IOException | URISyntaxException ioException) {
+                    ioException.printStackTrace();
+                }
 
             }
         });
@@ -387,13 +405,9 @@ public class JavaGachiMainScreenController implements IJavaGachiMainScreenContro
 
         }
 
-
-
         model.getJavaGachiAge().incrementSecondsOld();
         if (activeFriendModel != null) {
             updateFriendModelAndGUI();
-
-
         }
     }
 

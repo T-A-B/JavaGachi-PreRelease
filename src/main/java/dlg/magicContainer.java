@@ -1,5 +1,6 @@
 package dlg;
 
+//todo select better name
 public class magicContainer {
     String m_string;
     public String getString(){
