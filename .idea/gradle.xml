@@ -11,7 +11,8 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/JavaGachiServer" />
+            <option value="$PROJECT_DIR$/javagachigame" />
+            <option value="$PROJECT_DIR$/javagachiserver" />
           </set>
         </option>
       </GradleProjectSettings>

@@ -2,7 +2,10 @@ plugins {
 	id 'org.springframework.boot' version '2.6.2'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id 'application'
 }
+
+mainClassName = 'org.javagachi.javagachiserver.JavagachiserverApplication'
 
 group = 'org.javagachi'
 version = '0.0.1-SNAPSHOT'
@@ -11,16 +14,34 @@ sourceCompatibility = '1.8'
 repositories {
 	mavenCentral()
 }
+bootJar {
+	mainClassName = 'org.javagachi.javagachiserver.JavagachiserverApplication'
+}
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-
+	implementation project(':javagachigame')
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 test {
 	useJUnitPlatform()
+}
+
+
+sourceSets {
+	main {
+		java {
+	//		include "$buildDir/imported-sources"
+		}
+	}
+}
+
+task copyBin(type: Copy) {
+	dependsOn ':javagachigame:compileJava'
+	from file("$rootDir/javagachigame/src")
+	into file("$buildDir/imported-sources")
 }
 
 task openUrlInBrowser {
