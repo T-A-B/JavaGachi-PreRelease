@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="enums.JavaGachiEmotionEnumTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-01-06T05:25:47" hostname="DESKTOP-JIP7F1G" time="0.048">
+  <properties/>
+  <testcase name="getImageIcon()" classname="enums.JavaGachiEmotionEnumTest" time="0.048"/>
+  <system-out><![CDATA[class enums.JavaGachiEmotionEnum
+javax.swing.ImageIcon@22b8dcac
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

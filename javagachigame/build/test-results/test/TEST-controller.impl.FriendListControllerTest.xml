@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="controller.impl.FriendListControllerTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2022-01-06T05:25:47" hostname="DESKTOP-JIP7F1G" time="0.005">
+  <properties/>
+  <testcase name="changeColor()" classname="controller.impl.FriendListControllerTest" time="0.001"/>
+  <testcase name="getView()" classname="controller.impl.FriendListControllerTest" time="0.0"/>
+  <testcase name="bind()" classname="controller.impl.FriendListControllerTest" time="0.0"/>
+  <testcase name="populateJList()" classname="controller.impl.FriendListControllerTest" time="0.0"/>
+  <testcase name="initialize()" classname="controller.impl.FriendListControllerTest" time="0.001"/>
+  <testcase name="setModel()" classname="controller.impl.FriendListControllerTest" time="0.0"/>
+  <testcase name="getModel()" classname="controller.impl.FriendListControllerTest" time="0.0"/>
+  <testcase name="setView()" classname="controller.impl.FriendListControllerTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="game.handlers.JavaGachiImportHandlerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-01-06T05:25:47" hostname="DESKTOP-JIP7F1G" time="0.005">
+  <properties/>
+  <testcase name="loadJavaGachiFromEncryptedCode()" classname="game.handlers.JavaGachiImportHandlerTest" time="0.005"/>
+  <system-out><![CDATA[p_string X}piv17:4169916991699169916991699/V{ngt/582/477/477/477/477/477/477
+X}piv-7:4-699-699-699-699-699-699-V{ngt-582-477-477-477-477-477-477
+Tyler--360--255--255--255--255--255--255
+X}piv-7:4-699-699-699-699-699-699-V{ngt-582-477-477-477-477-477-477
+X}piv117:4116991169911699116991169911699
+V{ngt//582//477//477//477//477//477//477
+V{ngt//582//477//477//477//477//477//477
+bla
+V{ngt/582/477/477/477/477/477/477-Tyler-360-255-255-255-255-255-255
+name propTyler
+Tyler
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
