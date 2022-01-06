@@ -1,0 +1,19 @@
+This guide is a work in progress and will be substantially improved as the project grows.
+
+
+Step 1:
+Cloning the project.  Using intelliJ IDEA, import project from Version control.
+The project will be downloaded via Git and shortly after, the Gradle wrapper will initiate a Gradle build
+
+Step 2:
+Create Gradle run configuration (game)
+name (suggested): runGame
+tasks: clean assemble :javagachigame:run
+
+Step 3:
+Create Gradle run configuration (server)
+name (suggested): runServer
+tasks: clean assemble :javagachiserver:bootJar
+ 
+
+You are now able to build and run both the client and the server
