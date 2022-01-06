@@ -204,7 +204,7 @@ public class JavaGachiMainScreenController implements IJavaGachiMainScreenContro
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    URI uri = new URI("http://localhost:8080/greeting?name=" + model.getJavaGachiName() + "&age=" + model.getJavaGachiAge().getSecondsOld());
+                    URI uri = new URI("http://localhost:8080/greeting?name=" + model.getJavaGachiName().replace(" ", "%20") + "&age=" + model.getJavaGachiAge().getSecondsOld());
 
                     Desktop.getDesktop().browse(uri);
                 } catch (IOException | URISyntaxException ioException) {

@@ -1,3 +1,4 @@
 rootProject.name = 'JavaGachiGradle'
 include 'JavaGachiServer'
+include 'JavaGachiServer'
 
