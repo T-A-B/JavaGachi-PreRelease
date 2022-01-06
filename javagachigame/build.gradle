@@ -5,8 +5,8 @@ plugins {
     id 'application'
 }
 
-group 'org.example'
-version '1.0-SNAPSHOT'
+group 'org.javagachi'
+version '0.2-SNAPSHOT'
 
 repositories {
     mavenCentral()

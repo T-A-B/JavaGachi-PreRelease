@@ -112,6 +112,8 @@ public class GameHandlerImpl implements IGameHandler, Serializable {
 
     } catch (FileNotFoundException e) {
         System.out.println("File not found");
+        JOptionPane.showMessageDialog(null, "No save file detected, starting new game!");
+        newGame();
     } catch (IOException e) {
         newGame();
            System.out.println("Error initializing stream");
