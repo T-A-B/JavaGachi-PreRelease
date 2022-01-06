@@ -19,7 +19,7 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-	implementation project(':javagachigame')
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
@@ -38,11 +38,11 @@ sourceSets {
 	}
 }
 
-task copyBin(type: Copy) {
-	dependsOn ':javagachigame:compileJava'
-	from file("$rootDir/javagachigame/src")
-	into file("$buildDir/imported-sources")
-}
+//task copyBin(type: Copy) {
+//	dependsOn ':javagachigame:compileJava'
+//	from file("$rootDir/javagachigame/src")
+//	into file("$buildDir/imported-sources")
+//}
 
 task openUrlInBrowser {
 	doLast {
