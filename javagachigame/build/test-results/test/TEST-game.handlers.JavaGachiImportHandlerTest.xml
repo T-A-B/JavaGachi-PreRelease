@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="game.handlers.JavaGachiImportHandlerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-01-06T05:25:47" hostname="DESKTOP-JIP7F1G" time="0.005">
+<testsuite name="game.handlers.JavaGachiImportHandlerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-01-06T06:43:17" hostname="DESKTOP-JIP7F1G" time="0.005">
   <properties/>
   <testcase name="loadJavaGachiFromEncryptedCode()" classname="game.handlers.JavaGachiImportHandlerTest" time="0.005"/>
   <system-out><![CDATA[p_string X}piv17:4169916991699169916991699/V{ngt/582/477/477/477/477/477/477

@@ -14,9 +14,7 @@ sourceCompatibility = '1.8'
 repositories {
 	mavenCentral()
 }
-bootJar {
-	mainClassName = 'org.javagachi.javagachiserver.JavagachiserverApplication'
-}
+
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -31,10 +29,12 @@ test {
 
 
 sourceSets {
-	main {
-		java {
-	//		include "$buildDir/imported-sources"
-		}
+	imported {
+
+			java {
+				include "$buildDir/imported-sources"
+			}
+
 	}
 }
 
